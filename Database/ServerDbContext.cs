@@ -50,4 +50,6 @@ public class ServerDbContext : DbContext
     public DbSet<ProductRest> ProductRest { get; set; }
     
     public DbSet<Shop> Shop { get; set; }
+
+    public DbSet<CategoryProduct> CategoryProduct { get; set; }
 }

@@ -26,6 +26,8 @@ public class ProductService : Service, IProductService
                 this.uow.ProductRepository.Update(item);
             else
                 this.uow.ProductRepository.Create(item);
+
+            if (item.CategoryProduct != null) new CategoryProductService(uow).Save(item.CategoryProduct);
         }
         this.uow.Save();
         
@@ -58,5 +60,10 @@ public class ProductService : Service, IProductService
             this.uow.ProductRepository.Delete(item);
         }
         this.uow.Save();
+    }
+
+    public CategoryProduct ReadCategoryProduct(int id) //Oleg
+    {
+        return this.uow.CategoryProductRepository.Read(i => i.Id == id).FirstOrDefault();
     }
 }

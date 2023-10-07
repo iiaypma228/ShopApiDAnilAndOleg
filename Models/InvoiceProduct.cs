@@ -20,4 +20,5 @@ public class InvoiceProduct
     
     public double? Amount { get; set; }
     
+
 }

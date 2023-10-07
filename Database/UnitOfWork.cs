@@ -29,6 +29,7 @@ public class UnitOfWork : IUnitOfWork
 
         shopRepository = new Lazy<IShopRepository>(() => new ShopRepository(this._dbContext));
 
+        categoryProductRepository = new Lazy<ICategoryProductRepository> (() => new CategoryProductRepository(this._dbContext));
     }
 
     private Lazy<IEmployeeRepository> employeeRepository;
@@ -52,9 +53,12 @@ public class UnitOfWork : IUnitOfWork
     private Lazy<IProductRestRepository> productRestRepository;
     public IProductRestRepository ProductRestRepository { get {return productRestRepository.Value;} }
 
-    public Lazy<IShopRepository> shopRepository;
+    private Lazy<IShopRepository> shopRepository;
     public IShopRepository ShopRepository { get {return shopRepository.Value; } }
-    
+
+    private Lazy<ICategoryProductRepository> categoryProductRepository;
+    public ICategoryProductRepository CategoryProductRepository { get { return categoryProductRepository.Value; } }
+
     public void Save()
     {
         this._dbContext.ChangeTracker.AutoDetectChangesEnabled = true;

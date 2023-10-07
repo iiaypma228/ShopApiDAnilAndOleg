@@ -11,10 +11,12 @@ namespace Server.API.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService service = null;
+    private readonly ICategoryProductService categoryProductService = null;
     
     public ProductController(IServiceContainer container)
     {
         service = container.Resolve<IProductService>();
+        categoryProductService= container.Resolve<ICategoryProductService>();
     }
 
     [HttpGet("getallproduct")]
@@ -39,5 +41,12 @@ public class ProductController : Controller
             return BadRequest("Не має прав на додавання товару!");
         }
     }
-    
+
+    [HttpPost("createcategoryproduct")]
+
+    public IActionResult CreateCategoryProduct(CategoryProduct category)
+    {
+        this.categoryProductService.Save(category);
+        return Ok();
+    }
 }
