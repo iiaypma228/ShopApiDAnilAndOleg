@@ -1,4 +1,9 @@
-obj/
-bin/
+#build
+*~
+[Oo]bj/
+[Bb]in/
+packages/
+*.vs
+.idea/
 appsettings.Development.json
 appsettings.json
