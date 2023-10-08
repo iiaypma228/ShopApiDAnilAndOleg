@@ -52,4 +52,6 @@ public class ServerDbContext : DbContext
     public DbSet<Shop> Shop { get; set; }
 
     public DbSet<CategoryProduct> CategoryProduct { get; set; }
+    
+    public DbSet<SaleProduct> SaleProduct { get; set; }
 }
