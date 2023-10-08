@@ -8,5 +8,6 @@
         public string BankName { get; set; }
         public string BankAccount { get; set; }
         public string MFO { get; set; }
+
     }
 }
