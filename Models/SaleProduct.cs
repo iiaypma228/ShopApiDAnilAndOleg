@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.API.Models;
 
-public class ProductRest
+public class SaleProduct
 {
     public string Id { get; set; }
     
@@ -10,15 +10,18 @@ public class ProductRest
     public int ShopId { get; set; }
     
     [NotMapped]
-    public Shop Shop { get; set; } // на каком магазине остаток
+    public Shop? Shop { get; set; }
     
     [ForeignKey("Product")]
     public int ProductId { get; set; }
     
     [NotMapped]
-    public Product Product { get; set; }
+    public Product? Product { get; set; }
     
-    public double Amount { get; set; }  // количество товара на остатках
+    public decimal Price { get; set; }
+
+    public double Amount { get; set; }
     
-    public DateTime Date { get; set; } // на дату 
+    public DateTime Date { get; set; }
+
 }

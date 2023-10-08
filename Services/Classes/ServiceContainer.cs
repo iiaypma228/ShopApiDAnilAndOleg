@@ -1,4 +1,5 @@
 using Server.API.Database;
+using Server.API.Database.Interfaces;
 using Server.API.Services.Interfaces;
 
 namespace Server.API.Services.Classes;
@@ -28,6 +29,7 @@ public class ServiceContainer : IServiceContainer
             { typeof(IProductService), (o) => { return new ProductService(new UnitOfWork(o._context)); } },
             { typeof(IProductRestService), (o) => { return new ProductRestService(new UnitOfWork(o._context)); } },
             { typeof(IShopService), (o) => { return new ShopService(new UnitOfWork(o._context)); } },
-            { typeof(ICategoryProductService), (o) => {return new CategoryProductService(new UnitOfWork(o._context)); } }
+            { typeof(ICategoryProductService), (o) => {return new CategoryProductService(new UnitOfWork(o._context)); } },
+            {typeof(ISaleProductService), (o) => { return new SaleProductService(new UnitOfWork(o._context));}}
         };
 }

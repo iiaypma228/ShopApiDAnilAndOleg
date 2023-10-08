@@ -13,5 +13,6 @@ public interface IInvoiceService  : ICRUDService<Invoice>
     Shop ReadShop(int id);
 
     Employee ReadEmployee(int id);
+    void MoveInvoice(string id);
 
 }

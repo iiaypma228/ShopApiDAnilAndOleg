@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Server.API.Models;
 using Server.API.Services.Interfaces;
 
 namespace Server.API.Controllers;
@@ -49,6 +50,37 @@ public class InvoiceController : Controller
 
         return Ok(invoice);
 
+    }
+
+
+    [HttpPost("moveinvoice")]
+    public IActionResult MoveInvoice(int shopId, string invoiceId)
+    {
+        var invoice = this._service.Read(invoiceId);
+
+        if (invoice == null)
+            return BadRequest("Накладну не знайдено!");
+        
+        if (shopId == -5)
+        {
+            if (invoice.Status == DocumentStatus.InProccess || invoice.Status == DocumentStatus.Move)
+                return BadRequest("Повторне проведення не можливо!");
+
+            invoice.Status = DocumentStatus.InProccess;
+            this._service.Save(invoice);
+        }
+        else
+        {
+            if (invoice.Status == DocumentStatus.Draft)
+                return BadRequest(
+                    "Проведення не можливо, документ має статус Чернетка, очікуйте подальших дій від Центрального офісу!");
+            if (invoice.Status == DocumentStatus.Move)
+                return BadRequest("Повторне проведення не можливе!");
+            
+            this._service.MoveInvoice(invoiceId);
+        }
+        
+        return Ok();
     }
     
     

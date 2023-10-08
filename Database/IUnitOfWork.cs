@@ -21,6 +21,7 @@ public interface IUnitOfWork : IDisposable
     IShopRepository ShopRepository { get; }
 
     ICategoryProductRepository CategoryProductRepository { get; }
+    ISaleProductRepository SaleProductRepository { get; }
 
     void Save(); //сохранение, после этого транзакиця завершается и изменения вступают в силу
 

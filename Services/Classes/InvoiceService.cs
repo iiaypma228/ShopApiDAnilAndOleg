@@ -151,4 +151,32 @@ public class InvoiceService : Service, IInvoiceService
     {
         return this.uow.EmployeeRepository.Read(i => i.Id == id).FirstOrDefault();
     }
+
+    public void MoveInvoice(string id)
+    {
+        var invoice = this.Read(id);
+        invoice.InvoiceProducts = this.ReadProduct(id);
+
+        var restList = new List<ProductRest>();
+        
+        foreach (var product in invoice.InvoiceProducts)
+        {
+            var rest = new ProductRest()
+            { 
+              Id = Guid.NewGuid().ToString(),
+              Date  = invoice.Date.Value,
+              ShopId = invoice.ShopInId.Value,
+              Amount = product.Amount.Value,
+              ProductId = product.ProductId.Value,
+            };
+            
+            restList.Add(rest);
+        }
+
+        invoice.Status = DocumentStatus.Move;
+        
+        new ProductRestService(this.uow).Save(restList);
+        
+        this.uow.Save();
+    }
 }

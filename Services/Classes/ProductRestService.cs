@@ -42,7 +42,7 @@ public class ProductRestService : Service, IProductRestService
 
     public ProductRest Read(object id)
     {
-        return this.uow.ProductRestRepository.Read(i => i.Id == (int)id).FirstOrDefault();
+        return this.uow.ProductRestRepository.Read(i => i.Id == (string)id).FirstOrDefault();
     }
 
     public void Delete(ProductRest item)
