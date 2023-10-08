@@ -7,3 +7,4 @@ packages/
 .idea/
 appsettings.Development.json
 appsettings.json
+Properties/

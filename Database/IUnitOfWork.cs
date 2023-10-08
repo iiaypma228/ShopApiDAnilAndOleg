@@ -23,6 +23,12 @@ public interface IUnitOfWork : IDisposable
     ICategoryProductRepository CategoryProductRepository { get; }
     ISaleProductRepository SaleProductRepository { get; }
 
+    IProviderRepository ProviderRepository { get; } //OLeg
+
+    IContractProviderRepository ContractProviderRepository { get; } 
+
+    IContractProviderProductRepository ContractProviderProductRepository { get; }
+
     void Save(); //сохранение, после этого транзакиця завершается и изменения вступают в силу
 
 }

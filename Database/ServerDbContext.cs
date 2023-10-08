@@ -19,9 +19,19 @@ public class ServerDbContext : DbContext
                 LocationAdress = "Центарльний офіс",
                 ShopPhoneNumber = "xxx",
             });
-            
+
+            this.Provider.Add(new Provider()
+            {
+                Id = -4,
+                Name = "Центральний офіс",
+                Address = "Центарльний офіс",
+                BankName = "xxx",
+                BankAccount = "xxx",
+                MFO = "xxx"
+            });
+
             this.SaveChanges();
-            
+
             new EmployeeService(new UnitOfWork(this)).Save(new Employee()
             {
                 Name = "admin",
@@ -31,6 +41,16 @@ public class ServerDbContext : DbContext
                 Email = "admin@admin.com",
                 Phone = "380971701092",
                 Patronymic = "adminovich"
+            });
+            new EmployeeService(new UnitOfWork(this)).Save(new Employee()
+            {
+                Name = "oleg",
+                ProviderId = -4,
+                Surname = "grunt",
+                Password = "grunt",
+                Email = "grunt200@gmail.com",
+                Phone = "380953013828",
+                Patronymic = "andreiivich"
             });
         }
     }
@@ -54,4 +74,10 @@ public class ServerDbContext : DbContext
     public DbSet<CategoryProduct> CategoryProduct { get; set; }
     
     public DbSet<SaleProduct> SaleProduct { get; set; }
+
+    public DbSet<Provider> Provider { get; set; }
+
+    public DbSet<ContractProvider> ContractProvider { get; set; }
+
+    public DbSet<ContractProviderProduct> ContractProviderProduct { get; set; }
 }

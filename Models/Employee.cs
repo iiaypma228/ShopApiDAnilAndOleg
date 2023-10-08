@@ -12,7 +12,13 @@ public class Employee
     
     [NotMapped]
     public Shop? Shop { get; set; }
-    
+
+    [ForeignKey("Provider")]
+    public int? ProviderId { get; set; }
+
+    [NotMapped]
+    public Provider? Provider { get; set; } 
+
     public string? Name { get; set; }
     
     public string? Surname { get; set; }

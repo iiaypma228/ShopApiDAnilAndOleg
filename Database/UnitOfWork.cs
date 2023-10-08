@@ -29,9 +29,16 @@ public class UnitOfWork : IUnitOfWork
 
         shopRepository = new Lazy<IShopRepository>(() => new ShopRepository(this._dbContext));
 
-        categoryProductRepository = new Lazy<ICategoryProductRepository> (() => new CategoryProductRepository(this._dbContext));
+        categoryProductRepository = new Lazy<ICategoryProductRepository> (() => new CategoryProductRepository(this._dbContext)); //oleg
 
         saleProductRepository = new Lazy<ISaleProductRepository>(() => new SaleProductRepository(this._dbContext));
+
+        providerRepository = new Lazy<IProviderRepository>(() => new ProviderRepository(this._dbContext)); //oleg
+
+        contractProviderRepository = new Lazy<IContractProviderRepository>(() => new ContractProviderRepository(this._dbContext)); //oleg
+
+        contractProviderProductRepository = new Lazy<IContractProviderProductRepository>(() => new ContractProviderProductRepository(this._dbContext)); //oleg
+
     }
 
     private Lazy<IEmployeeRepository> employeeRepository;
@@ -58,11 +65,21 @@ public class UnitOfWork : IUnitOfWork
     private Lazy<IShopRepository> shopRepository;
     public IShopRepository ShopRepository { get {return shopRepository.Value; } }
 
-    private Lazy<ICategoryProductRepository> categoryProductRepository;
-    public ICategoryProductRepository CategoryProductRepository { get { return categoryProductRepository.Value; } }
+    private Lazy<ICategoryProductRepository> categoryProductRepository; //oleg
+    public ICategoryProductRepository CategoryProductRepository { get { return categoryProductRepository.Value; } } //oleg
 
     private Lazy<ISaleProductRepository> saleProductRepository;
     public ISaleProductRepository SaleProductRepository { get {return saleProductRepository.Value; } }
+
+    private Lazy<IProviderRepository> providerRepository; // oleg
+    public IProviderRepository ProviderRepository { get { return providerRepository.Value; } }
+
+    private Lazy<IContractProviderRepository> contractProviderRepository;
+    public IContractProviderRepository ContractProviderRepository { get { return contractProviderRepository.Value; } }
+
+    private Lazy<IContractProviderProductRepository> contractProviderProductRepository;
+    public IContractProviderProductRepository ContractProviderProductRepository { get { return contractProviderProductRepository.Value; } }
+
 
     public void Save()
     {
